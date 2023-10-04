@@ -4,24 +4,26 @@
 
 .custom-scroll {
   scrollbar-width: 1px;
-  scrollbar-color: blue transparent;
+  scrollbar-color: #b91c1c transparent;
 }
 
 .custom-scroll::-webkit-scrollbar {
-  background-color: blue;
-  scrollbar-width: 1px;
   background-color: transparent;
+  scrollbar-width: 1px;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: blue;
   scrollbar-width: 1px;
-  background-color: transparent;
+  background-color: #b91c1c;
 }
 
 .custom-scroll::-webkit-scrollbar-track {
   scrollbar-width: 1px;
   background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 1px;
 }
 
 html {

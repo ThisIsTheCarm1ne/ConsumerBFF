@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 
 import Link from 'next/link'
+import Image from 'next/image'
 export const dynamic = 'force-dynamic'
 
 export default async function Index() {
@@ -22,6 +23,13 @@ export default async function Index() {
           You should try it NOW
         </Link>
       </div>
+        <Image
+          className="absolute top-10 right-72 w-1/3 h-auto"
+          src="/logo.svg"
+          alt="Big logo"
+          width={600}
+          height={600}
+        />
       <div className="text-center flex flex-col items-center">
         <h1 className="my-14 text-2xl w-72 m-auto">Why you should trust us with your finances?</h1>
         <div className="flex items-center">

@@ -1,10 +1,25 @@
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+
 import Link from 'next/link'
 import Messages from './messages'
 
-export default function Login() {
+export default async function Login() {
+
+  const supabase = createServerComponentClient<Database>({ cookies })
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (user) {
+    redirect("/dashboard");
+  }
 
   const btnStyle: string = "py-2 px-4 rounded-md border-red-600 border-2 hover:ring-4 hover:ring-red-600 hover:ring-opacity-50 transition duration-300 ease-in-out";
   return (
+  
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <Link
         href="/"
