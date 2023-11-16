@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 export default function Transactions() {
   const supabase = createClientComponentClient<Database>()
-  const [transactions, setTransactions] = useState<Database>([]);
+  const [transactions, setTransactions] = useState<Database[]>([]);
   const [timeSpan, setTimeSpan] = useState<string>(() => {
     const currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() - 1);
@@ -54,13 +54,14 @@ export default function Transactions() {
           .gte("created_at", timeSpan)
           .order('created_at', { ascending: false });
 
-        setTransactions(data);
+        const transactions: Database[] = data || [];
+        setTransactions(transactions);
       }
     }
     fetchData();
   }, [timeSpan])
 
-  const total: number = transactions?.reduce((accumulator: number, currentObject) => {
+  const total: number = transactions?.reduce((accumulator: number, currentObject: any) => {
     return accumulator + currentObject.amount;
   }, 0);
 
@@ -80,7 +81,7 @@ export default function Transactions() {
       <div className="">
         <h1 className="text-center ml-5 text-3xl">Total: {total.toFixed(2)}</h1>
         <div className="my-5 h-50 overflow-y-auto custom-scroll">
-          {transactions?.map((transaction) => (
+          {transactions?.map((transaction: any) => (
             <div key={transaction.id} className={`${transaction.amount < 0 ? 'below_zero' : 'above_zero'} border-b-2 mb-2`}>
               <h1 className="inline-block font-semibold">{transaction.title}</h1>
               <p className="inline-block float-right">{new Date(transaction.created_at).toLocaleDateString('en-GB', {
